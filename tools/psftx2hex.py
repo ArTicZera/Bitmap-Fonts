@@ -4,7 +4,7 @@ import re
 import sys
 
 if len(sys.argv) != 3:
-    print("Uso:")
+    print("Usage:")
     print("python psftx.py fonte.psftx font.c")
     exit(1)
 
@@ -63,14 +63,12 @@ while i < len(lines):
     i += 1
 
 if width is None or height is None:
-    print("Erro: não foi possível determinar o tamanho da fonte.")
+    print("Error: can't find font's size.")
     exit(1)
 
 bytes_per_row = (width + 7) // 8
 
 with open(output_file, "w") as out:
-
-    out.write("// Arquivo gerado automaticamente\n\n")
 
     out.write("#include <stdint.h>\n\n")
 
