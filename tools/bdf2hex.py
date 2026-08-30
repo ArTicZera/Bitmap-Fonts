@@ -49,7 +49,7 @@ bytes_per_row = (width + 7) // 8
 with open(output_file, "w") as out:
     out.write(f"#define WFONT {width}\n")
     out.write(f"#define HFONT {height}\n\n")
-    out.write("uint8_t font[] = {\n")
+    out.write("unsigned char font[] = {\n")
 
     for ch in range(256):
 
