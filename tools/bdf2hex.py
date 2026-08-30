@@ -5,7 +5,7 @@ import sys
 
 if len(sys.argv) < 3:
     print("Usage:")
-    print("python bdf2hex.py font.bdf font.c")
+    print("python bdf2hex.py font.bdf font.h")
     exit(1)
 
 input_file = sys.argv[1]
