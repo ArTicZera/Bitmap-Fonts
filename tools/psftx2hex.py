@@ -5,7 +5,7 @@ import sys
 
 if len(sys.argv) != 3:
     print("Usage:")
-    print("python psftx.py fonte.psftx font.c")
+    print("python psftx2hex.py font.psftx font.c")
     exit(1)
 
 input_file = sys.argv[1]
@@ -69,29 +69,20 @@ if width is None or height is None:
 bytes_per_row = (width + 7) // 8
 
 with open(output_file, "w") as out:
-
-    out.write("#include <stdint.h>\n\n")
-
     out.write(f"#define WFONT {width}\n")
     out.write(f"#define HFONT {height}\n")
-    out.write(f"#define GLYPH {len(glyphs)}\n\n")
-
-    out.write("uint8_t font[] = {\n\n")
+    out.write("unsigned char font[] = {\n\n")
 
     for g, bitmap in enumerate(glyphs):
-
-        out.write(f"    // Glyph {g}\n")
-
         for row in bitmap:
-
             for b in range(bytes_per_row):
-
+                
                 value = 0
 
                 for bit in range(8):
-
+                    
                     x = b * 8 + bit
-
+                    
                     if x >= width:
                         break
 
@@ -99,11 +90,8 @@ with open(output_file, "w") as out:
                         value |= 1 << (7 - bit)
 
                 out.write(f"0x{value:02X}, ")
-
             out.write("\n")
-
         out.write("\n")
-
     out.write("};\n")
 
 print("Converted Successfully!")
